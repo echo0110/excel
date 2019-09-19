@@ -96,8 +96,8 @@ from xlutils.copy import copy
 def read_excel():
     # 打开文件
     workbook = xlrd.open_workbook(r'D:\test5.xlsx')
-    # new_workbook = copy(workbook)  # 将xlrd对象拷贝转化为xlwt对象
-    # new_worksheet = new_workbook.get_sheet(0)  # 获取转化后工作簿中的第一个表格
+    new_workbook = copy(workbook)  # 将xlrd对象拷贝转化为xlwt对象
+    new_worksheet = new_workbook.get_sheet(0)  # 获取转化后工作簿中的第一个表格
 
     # wbook = copy(workbook)  # wbook即为xlwt.WorkBook对象
     # wsheet = wbook.get_sheet(0)  # 通过get_sheet()获取的sheet有write()方法
@@ -123,28 +123,23 @@ def read_excel():
     # 获取单元格内容
     cols = sheet2.col_values(8)  # 获取第8列内容
 
-    print(sheet2.cell(0, 0))
-    print(sheet2.col_values(7)[4])
-    print(sheet2.col_values(7)[4].replace('CSC-J', ''))
-    # write = sheet2.col_values(7)[4].replace('CSC-J', 'niu')
-    # new_worksheet.write(7, 4, write)
-    # new_workbook.save(r'D:\test5.xlsx')  # 保存工作簿
-    print(sheet2.col_values(7)[4])
-    print("xls格式表格【追加】写入数据成功！")
+    # print(sheet2.cell(0, 0))
+    # print(sheet2.col_values(7)[4])
 
-    # workbook.save(r'D:\test5.xlsx')
-
-    # workbook.save(r'D:\test5.xlsx')
-    # workbook.save(r'D:\test5.xlsx')
-    # print(sheet2.cell(i, j))
     # 用for循环的方式连续向单元格中写入内容
-    # for i in range(4, 20):
-    #     for j in range(7, 9):
-            # print(sheet2.cell(i, j))   # replace('CSC-J', 'niu')
-            # sheet2.cell(i, j)
-            # sheet2.write(i, j, 'niu')
-            # print(sheet2.cell(i, j))
-     # 保存excel文件，写入完成后，一定要保存
+    for i in range(7, 9):
+        for j in range(4, 359):
+            # print(sheet2.col_values(7)[4].replace('CSC-J', ''))
+            # print(sheet2.col_values(7)[4].replace('CSC-J', ''))
+            write = sheet2.col_values(i)[j].replace('CSC-J', '')
+            new_worksheet.write(j, i, write)
+            new_workbook.save(r'D:\test5.xls')  # 保存工作簿
+            print(sheet2.col_values(i)[j])
+            print("xls格式表格【追加】写入数据成功！")
+
+
+
+
 
 
     # print(sheet2.cell(1, 0).value.encode('utf-8'))
