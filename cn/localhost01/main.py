@@ -96,77 +96,72 @@ from xlrd import XL_CELL_NUMBER
 from openpyxl.styles import numbers
 
 
-
 def read_excel():
-    # 打开文件
-    # workbook = xlrd.open_workbook(r'D:\test5.xlsx')
-    workbook = xlrd.open_workbook(r'D:\test5.xls')
-    new_workbook = copy(workbook)  # 将xlrd对象拷贝转化为xlwt对象
-    new_worksheet = new_workbook.get_sheet(0)  # 获取转化后工作簿中的第一个表格
+    filename = 'D:/test8.xlsx'
+    wb = load_workbook(filename)
+    # Sheet1 = wb.get_sheet(0)
+    # ws = wb.sheet_by_index(0)
+    # print(wb.sheet_names()[0])
+    ws = wb['sheet1']
+    ws.title = 'niu'  # 修改名为Sheet1工作表名称
 
-    # 预定一个格式
-    style = xlwt.XFStyle()
-    style.number_format = numbers.FORMAT_NUMBER
-    # 根据sheet索引或者名称获取sheet内容
-    sheet2 = workbook.sheet_by_index(0)  # sheet索引从0开始
-
-    # sheet的名称，行数，列数
-    # print(sheet2.name, sheet2.nrows, sheet2.ncols)
-
-    # 获取整行和整列的值（数组）
-    # rows = sheet2.row_values(3)  # 获取第四行内容
-    # cols = sheet2.col_values(2)  # 获取第三列内容
-    # cols = sheet2.col_values(8)  # 获取第8列内容
-    # print(rows)
-    # print(cols)
+    # print(wb.title)
+    wb.save('D:/test8.xls')  # 保存变更
+    # wb.close()
 
 
-    # 获取单元格内容
-    cols = sheet2.col_values(8)  # 获取第8列内容
-    print(sheet2.cell(7, 7).ctype)
-    # xlrd.xlnumber_as_tuple(sheet2.cell_value(7, 4), 2)
-    # xlrd.XL_CELL_NUMBER(sheet2.cell_value(7, 4))
 
-    # sheet2.cell.ctype == XL_CELL_NUMBER
 
-    # print(sheet2.cell_value(10, 7))
-    # new_worksheet.write(10, 7, sheet2.cell_value(10, 7))
-
-    # print(sheet2.cell_type(7, 7))
-    # print(sheet2.cell_type(12, 7))
-
-    # sheet2.cell['H'].number_format = numbers.FORMAT_GENERAL
-    # sheet2.cell_value(10, 7).number_format = numbers.FORMAT_NUMBER
-
-    # sheet2.cell_value(10, 7).number_format = numbers.FORMAT_NUMBER
-    print(sheet2.cell_type(13, 7))
-    sheet2.cell(13, 7).number_format = numbers.NumberFormat
-
-    # sheet2.cell(13, 7).number_format = numbers
-
-    sheet2.cell(12, 8).number_format = numbers.NumberFormat
-    new_write = sheet2.col_values(8)[12]
-    print(new_write)
-    # new_write.number_format = numbers
-    new_write = int(new_write)
-    new_worksheet.write(12, 8, new_write, style)
-    # new_worksheet.write(4, 8, new_write, style)
-    print(sheet2.col_values(12, 8))
-    new_workbook.save(r'D:\test5.xls')  # 保存工作簿
-    # ord(sheet2.cell_value(10, 7))
-    # new_workbook.save(r'D:\test5.xls')  # 保存工作簿
-    # print(sheet2.cell_type(7, 7))
-    # print(xlrd.XL_CELL_NUMBER('12'))
-    # print(sheet2.col_values(7)[4].ctype)
-
-    # 用for循环的方式连续向单元格中写入内容
-    # for i in range(7, 9):
-    #     for j in range(4, 359):
-    #         write = sheet2.col_values(i)[j].replace('CSC-J', '')
-    #         new_worksheet.write(j, i, write)
-    #         new_workbook.save(r'D:\test5.xls')  # 保存工作簿
-    #         print(sheet2.col_values(i)[j])
-    #         print("xls格式表格【追加】写入数据成功！")
+# def read_excel():
+#     # 打开文件
+#     # workbook = xlrd.open_workbook(r'D:\test5.xlsx')
+#     workbook = xlrd.open_workbook(r'D:\test5.xls')
+#
+#     filename = 'D:/test8.xlsx'
+#     wb_test6 = load_workbook(filename)
+#     new_workbook = copy(workbook)  # 将xlrd对象拷贝转化为xlwt对象
+#     new_worksheet = new_workbook.get_sheet(0)  # 获取转化后工作簿中的第一个表格
+#
+#     # 预定一个格式
+#     style = xlwt.XFStyle()
+#     style.number_format = numbers.FORMAT_NUMBER
+#     # 根据sheet索引或者名称获取sheet内容
+#     sheet2 = workbook.sheet_by_index(0)  # sheet索引从0开始
+#
+#
+#     # 获取单元格内容
+#     sheet2.cell(12, 8).number_format = numbers.NumberFormat
+#     new_write = sheet2.col_values(8)[12]
+#     print(new_write)
+#     new_write = int(new_write)
+#     new_worksheet.write(12, 8, new_write, style)
+#     # new_worksheet.write(4, 8, new_write, style)
+#     print(sheet2.col_values(12, 8))
+#
+#     ws = wb_test6['Sheet1']
+#     ws.title = '计划'  #
+#     wb_test6.save(filename)  # 保存变更
+#     # sheet1_name = wb_test6.sheet_names()[0]  # 获得工作表 表名
+#     # print(sheet1_name)
+#     # print(workbook.sheet_names()[0])
+#     # ws = wb_test6[sheet1_name]
+#     # ws.title = 'ni'    # 修改名为Sheet1工作表名称
+#     # workbook.title = '未承保'  # 修改名为Sheet1工作表名称
+#     new_workbook.save(r'D:\test5.xls')  # 保存工作簿
+#     # ord(sheet2.cell_value(10, 7))
+#     # new_workbook.save(r'D:\test5.xls')  # 保存工作簿
+#     # print(sheet2.cell_type(7, 7))
+#     # print(xlrd.XL_CELL_NUMBER('12'))
+#     # print(sheet2.col_values(7)[4].ctype)
+#
+#     # 用for循环的方式连续向单元格中写入内容
+#     # for i in range(7, 9):
+#     #     for j in range(4, 359):
+#     #         write = sheet2.col_values(i)[j].replace('CSC-J', '')
+#     #         new_worksheet.write(j, i, write)
+#     #         new_workbook.save(r'D:\test5.xls')  # 保存工作簿
+#     #         print(sheet2.col_values(i)[j])
+#     #         print("xls格式表格【追加】写入数据成功！")
 
 
 
