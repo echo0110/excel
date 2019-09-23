@@ -110,34 +110,36 @@ def read_excel():
     ws2.title = '未到账'  # 修改名为Sheet1工作表名称
 
     wb.create_sheet(title='未到账', index=1)
+    ws3 = wb2['未到账']
     # ws_sheet2 = wb2['test2']
     # print(ws_sheet2.title)
     wb.save('D:/未承保.xls')  # 保存变更
     wb2.save('D:/未到账.xls')  # 保存变更
-    wb.close()
-    wb2.close()
+    # wb.close()
+    # wb2.close()
 
-    wb = xlrd.open_workbook('D:/未承保.xls')
-    wb2 = xlrd.open_workbook('D:/未到账.xls')
+    # wb = xlrd.open_workbook('D:/未承保.xls')
+    # wb2 = xlrd.open_workbook('D:/未到账.xls')
 
     # sheets1 = ws2.sheet_names()[0]    #获取sheet页未承保
     # print(sheets1)
     # sheets2 = w  File "D:/Taobao_order_robot-develop2/cn/localhost01/main.py", line 130, in read_excel
     #     max_row = sheet2.max_row  # 最大行数s2.sheet_names()[0]   # 未到账
     # sheet2 = wb.get_sheet_by_name(sheets2[0])
-    sheet1 = wb.sheet_by_index(1)
-    sheet2 = wb2.sheet_by_index(0)
+    # sheet1 = wb.sheet_by_index(1)
+    # sheet2 = wb2.sheet_by_index(0)
 
-    max_row = sheet2.utter_max_rows  # 最大行数
-    print(max_row)
-    max_column = sheet2.utter_max_cols  # 最大列数
-    print(max_column)
-    # for m in range(1, max_row + 1):
-    #     for n in range(97, 97 + max_column):  # chr(97)='a'
-    #         n = chr(n)  # ASCII字符
-    # i = '%s%d' % (n, m)  # 单元格编号
-    # cell1 = sheet2[i].value  # 获取data单元格数据
-    # sheet1[i][1].value = cell1  # 赋值到test单元格
+    # wb = load_workbook('D:/未到账.xls')
+    # wb2 = load_workbook('D:/未承保.xls')
+    # ws = wb['未到账']
+    # ws2 = wb2['未到账']
+    #
+    # 两个for循环遍历整个excel的单元格内容
+    for i, row in enumerate(ws2.iter_rows()):
+        for j, cell in enumerate(row):
+            ws3.cell(row=i + 1, column=j + 1, value=cell.value)
+
+    wb.save('D:/未承保.xls')
 
 
 
