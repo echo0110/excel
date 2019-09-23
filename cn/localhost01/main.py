@@ -97,19 +97,61 @@ from openpyxl.styles import numbers
 
 
 def read_excel():
-    filename = 'D:/test8.xlsx'
+    filename = 'D:/未承保.xlsx'
+    filename2 = 'D:/未到账.xlsx'
     wb = load_workbook(filename)
+    wb2 = load_workbook(filename2)
     # Sheet1 = wb.get_sheet(0)
     # ws = wb.sheet_by_index(0)
     # print(wb.sheet_names()[0])
     ws = wb['sheet1']
-    ws.title = 'niu'  # 修改名为Sheet1工作表名称
+    ws2 = wb2['sheet1']
+    ws.title = '未承保'  # 修改名为Sheet1工作表名称
+    ws2.title = '未到账'  # 修改名为Sheet1工作表名称
 
-    # print(wb.title)
-    wb.save('D:/test8.xls')  # 保存变更
-    # wb.close()
+    wb.create_sheet(title='未到账', index=1)
+    # ws_sheet2 = wb2['test2']
+    # print(ws_sheet2.title)
+    wb.save('D:/未承保.xls')  # 保存变更
+    wb2.save('D:/未到账.xls')  # 保存变更
+    wb.close()
+    wb2.close()
+
+    wb = xlrd.open_workbook('D:/未承保.xls')
+    wb2 = xlrd.open_workbook('D:/未到账.xls')
+
+    # sheets1 = ws2.sheet_names()[0]    #获取sheet页未承保
+    # print(sheets1)
+    # sheets2 = w  File "D:/Taobao_order_robot-develop2/cn/localhost01/main.py", line 130, in read_excel
+    #     max_row = sheet2.max_row  # 最大行数s2.sheet_names()[0]   # 未到账
+    # sheet2 = wb.get_sheet_by_name(sheets2[0])
+    sheet1 = wb.sheet_by_index(1)
+    sheet2 = wb2.sheet_by_index(0)
+
+    max_row = sheet2.utter_max_rows  # 最大行数
+    print(max_row)
+    max_column = sheet2.utter_max_cols  # 最大列数
+    print(max_column)
+    # for m in range(1, max_row + 1):
+    #     for n in range(97, 97 + max_column):  # chr(97)='a'
+    #         n = chr(n)  # ASCII字符
+    # i = '%s%d' % (n, m)  # 单元格编号
+    # cell1 = sheet2[i].value  # 获取data单元格数据
+    # sheet1[i][1].value = cell1  # 赋值到test单元格
 
 
+
+
+# def combine_excel(file_path1, file_path2, target_path):
+#     # 文件读入
+#     data1 = pd.read_excel(file_path1)
+#     data2 = pd.read_excel(file_path2)
+#     target_file = pd.ExcelWriter(target_path)
+#
+#     data1.to_excel(test, sheet_name="未承保", index=False)
+#     data2.to_excel(test, sheet_name="未到账", index=False)
+#
+#     # return test
 
 
 # def read_excel():
@@ -169,12 +211,8 @@ def read_excel():
 
 
 
-
-
 if __name__ == '__main__':
     read_excel()
-
-
 
 
 
