@@ -105,24 +105,36 @@ def read_excel():
     # ws = wb.sheet_by_index(0)
     # print(wb.sheet_names()[0])
     ws = wb['sheet1']
+
     ws2 = wb2['sheet1']
     ws.title = '未承保'  # 修改名为Sheet1工作表名称
     ws2.title = '未到账'  # 修改名为Sheet1工作表名称
 
     wb.create_sheet(title='未到账', index=1)
-    ws3 = wb2['未到账']
+    ws3 = wb['未到账']
+
+    # 获取workbook中所有的表格
+
+    # ws3 = wb.get_sheet_by_name(sheets[0])
+    # 获取workbook中所有的表格
+    # sheets = wb.get_sheet_names()
+    # ws3 = wb.get_sheet_by_name(sheets[1])
     # ws_sheet2 = wb2['test2']
     # print(ws_sheet2.title)
+
     wb.save('D:/未承保.xls')  # 保存变更
     wb2.save('D:/未到账.xls')  # 保存变更
-    # wb.close()
-    # wb2.close()
-
     # wb = xlrd.open_workbook('D:/未承保.xls')
     # wb2 = xlrd.open_workbook('D:/未到账.xls')
+    #
+    # ws = wb2['未到账']
+    # ws2 = wb['未到账']
 
-    # sheets1 = ws2.sheet_names()[0]    #获取sheet页未承保
-    # print(sheets1)
+    # sheets1 = wb.sheet_names()[1]    # 获取sheet页未承保
+    # ws3 = wb.get_sheet_by_name(sheets1[1])
+    # sheet2 = wb.sheet_by_index(1)  # sheet索引从0开始
+    # table = wb.sheets()[1]  # 通过索引顺序获取
+    # print(table.cell.value(0, 0))
     # sheets2 = w  File "D:/Taobao_order_robot-develop2/cn/localhost01/main.py", line 130, in read_excel
     #     max_row = sheet2.max_row  # 最大行数s2.sheet_names()[0]   # 未到账
     # sheet2 = wb.get_sheet_by_name(sheets2[0])
@@ -133,12 +145,12 @@ def read_excel():
     # wb2 = load_workbook('D:/未承保.xls')
     # ws = wb['未到账']
     # ws2 = wb2['未到账']
-    #
     # 两个for循环遍历整个excel的单元格内容
-    for i, row in enumerate(ws2.iter_rows()):
+    for i, row in enumerate(ws.iter_rows()):
         for j, cell in enumerate(row):
             ws3.cell(row=i + 1, column=j + 1, value=cell.value)
 
+    # ws3.cell(row=1, column=1, value=10)
     wb.save('D:/未承保.xls')
 
 
